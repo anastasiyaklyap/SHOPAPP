@@ -4,10 +4,6 @@ import clsx from 'clsx';
 
 const OptionColor = ({ colors, currentColor, changeColor }) => {
 	const colorClassName = (color) => {
-		console.log(
-			`color${color[0].toUpperCase()}${color.substr(1).toLowerCase()}`,
-			'color class name'
-		);
 		return `color${color[0].toUpperCase()}${color.substr(1).toLowerCase()}`;
 	};
 	return (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Product.module.scss';
 import ProductImage from '../ProductImage/ProductImage';
@@ -11,18 +11,19 @@ const Product = ({ name, title, colors, sizes, basePrice }) => {
 	const changeColor = (color) => {
 		setCurrentColor(color);
 	};
+
 	const changeSize = (size) => {
 		setCurrentSize(size);
 	};
-	const getPrice = () => {
-		return (
-			basePrice + sizes.find(({ name }) => name === currentSize).additionalPrice
-		);
-	};
+
+	const getPrice = useMemo(() => {
+		return () =>
+			basePrice +
+			sizes.find(({ name }) => name === currentSize).additionalPrice;
+	}, [currentSize]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(e);
 		console.log(`Name: ${title}`);
 		console.log(`Price: ${getPrice()}`);
 		console.log(`Size: ${currentSize}`);
